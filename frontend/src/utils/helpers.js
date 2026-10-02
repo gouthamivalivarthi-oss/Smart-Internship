@@ -33,37 +33,37 @@ export const formatRelativeTime = (dateString) => {
 export const getStatusBadgeStyle = (status) => {
   switch (status) {
     case 'Wishlist':
-      return 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700';
+      return 'bg-[#F6EBDD] text-[#3D2B24] border-[#F5B895]/40 dark:bg-[#3D2B24] dark:text-[#FFF8ED] dark:border-[#553B30] font-semibold';
     case 'Applied':
-      return 'bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800';
+      return 'bg-[#F5B895]/20 text-[#C85C45] border-[#F5B895]/50 dark:bg-[#F5B895]/15 dark:text-[#F5B895] font-bold';
     case 'In Review':
-      return 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800';
+      return 'bg-[#F5B895]/30 text-[#A84532] border-[#F5B895]/60 dark:bg-[#F5B895]/20 dark:text-[#F5B895] font-bold';
     case 'Interviewing':
-      return 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-800';
+      return 'bg-[#B9A7E8]/25 text-[#6C54A7] border-[#B9A7E8]/40 dark:bg-[#B9A7E8]/20 dark:text-[#B9A7E8] font-bold';
     case 'Offered':
-      return 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800';
+      return 'bg-[#9DB79B]/25 text-[#5C7D5A] border-[#9DB79B]/50 dark:bg-[#9DB79B]/20 dark:text-[#9DB79B] font-bold';
     case 'Rejected':
-      return 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800';
+      return 'bg-[#C85C45]/15 text-[#A84532] border-[#C85C45]/30 dark:bg-[#C85C45]/20 dark:text-[#F5B895] font-semibold';
     default:
-      return 'bg-slate-100 text-slate-700 border-slate-200';
+      return 'bg-[#F6EBDD] text-[#3D2B24] border-[#F5B895]/30';
   }
 };
 
 export const getPriorityBadgeStyle = (priority) => {
   switch (priority) {
     case 'High':
-      return 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300';
+      return 'bg-[#C85C45]/20 text-[#A84532] dark:text-[#F5B895] border border-[#C85C45]/40 font-bold';
     case 'Medium':
-      return 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300';
+      return 'bg-[#F5B895]/30 text-[#C85C45] dark:text-[#F5B895] border border-[#F5B895]/50 font-bold';
     case 'Low':
-      return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
+      return 'bg-[#F6EBDD] text-[#3D2B24] dark:bg-[#3D2B24] dark:text-[#FFF8ED] border border-[#F5B895]/30';
     default:
-      return 'bg-slate-100 text-slate-700';
+      return 'bg-[#F6EBDD] text-[#3D2B24]';
   }
 };
 
 export const getScoreColor = (score) => {
-  if (score >= 80) return 'text-emerald-500 stroke-emerald-500';
-  if (score >= 60) return 'text-amber-500 stroke-amber-500';
-  return 'text-rose-500 stroke-rose-500';
+  if (score >= 80) return 'text-[#5C7D5A] stroke-[#5C7D5A]';
+  if (score >= 60) return 'text-[#E9785B] stroke-[#E9785B]';
+  return 'text-[#C85C45] stroke-[#C85C45]';
 };

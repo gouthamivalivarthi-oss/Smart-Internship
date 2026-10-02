@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { analyticsApi, applicationApi, interviewApi } from '../services/api';
 import StatCard from '../components/common/StatCard';
+import ThreeCard from '../components/3d/ThreeCard';
+import ThreeButton from '../components/3d/ThreeButton';
 import ApplicationModal from '../components/applications/ApplicationModal';
 import InterviewQuestionsModal from '../components/ai/InterviewQuestionsModal';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -16,7 +18,8 @@ import {
   FiArrowRight,
   FiExternalLink,
   FiCheckCircle,
-  FiAlertCircle
+  FiAlertCircle,
+  FiStar,
 } from 'react-icons/fi';
 import { formatDate, formatRelativeTime, getStatusBadgeStyle } from '../utils/helpers';
 import toast from 'react-hot-toast';
@@ -37,7 +40,7 @@ export const DashboardPage = () => {
       const [analyticsRes, appsRes, interviewsRes] = await Promise.all([
         analyticsApi.getStudent(),
         applicationApi.getAll({ limit: 5 }),
-        interviewApi.getAll()
+        interviewApi.getAll(),
       ]);
 
       if (analyticsRes.data.success) {
@@ -81,101 +84,106 @@ export const DashboardPage = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner size="lg" text="Loading dashboard analytics..." />;
+    return <LoadingSpinner size="lg" text="Loading warm 3D dashboard metrics..." />;
   }
 
   return (
     <div className="space-y-8">
-      {/* Welcome Banner */}
-      <div className="glass-card rounded-3xl p-6 sm:p-8 border shadow-sm relative overflow-hidden bg-gradient-to-r from-indigo-900/90 via-indigo-800/90 to-purple-900/90 text-white">
+      {/* Warm 3D Hero Welcome Banner */}
+      <div className="relative rounded-3xl p-6 sm:p-9 border border-[#F5B895]/50 shadow-[0_16px_40px_-8px_rgba(200,92,69,0.28)] overflow-hidden bg-gradient-to-r from-[#E9785B] via-[#C85C45] to-[#8F78C8] text-white">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1.5 max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
-              Candidate Overview
+          <div className="space-y-2 max-w-xl">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider text-white">
+              <FiStar className="w-3.5 h-3.5" />
+              Candidate 3D Dashboard
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black">
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Welcome, {user?.name || 'Student'}! 👋
             </h1>
-            <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
-              {stats?.activeApplications || 0} active internship applications in your pipeline.
-              Review your upcoming milestones and practice role-tailored questions with AI.
+            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
+              You have <strong className="font-extrabold">{stats?.activeApplications || 0} active applications</strong> in your career pipeline.
+              Track your upcoming milestones and run targeted AI interview preparations.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
+            <ThreeButton
+              variant="secondary"
               onClick={() => setIsAddModalOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-indigo-900 font-bold text-xs shadow-md hover:bg-indigo-50 active:scale-95 transition"
+              className="rounded-2xl font-bold bg-white text-[#C85C45] hover:bg-[#FFF8ED] shadow-lg"
             >
-              <FiPlus className="w-4 h-4 text-indigo-600" />
+              <FiPlus className="w-4 h-4 text-[#E9785B] mr-1.5" />
               <span>Track Application</span>
-            </button>
-            <Link
-              to="/ai-hub"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs backdrop-blur-md border border-white/20 active:scale-95 transition"
-            >
-              <FiCpu className="w-4 h-4 text-indigo-300" />
-              <span>AI Career Hub</span>
+            </ThreeButton>
+
+            <Link to="/ai-hub">
+              <ThreeButton
+                variant="lavender"
+                className="rounded-2xl font-bold shadow-lg"
+              >
+                <FiCpu className="w-4 h-4 mr-1.5" />
+                <span>AI Career Hub</span>
+              </ThreeButton>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* KPI Stat Cards */}
+      {/* KPI Dimensional Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard
           title="Total Tracked"
           value={stats?.totalApplications || 0}
           icon={FiBriefcase}
           subtitle="Opportunities saved"
-          color="indigo"
+          color="coral"
         />
         <StatCard
           title="In Review"
           value={stats?.statusCounts?.['In Review'] || 0}
           icon={FiClock}
           subtitle="Recruiter reviewing"
-          color="amber"
+          color="peach"
         />
         <StatCard
           title="Interviews"
           value={stats?.statusCounts?.Interviewing || 0}
           icon={FiCalendar}
           subtitle="Active rounds"
-          color="purple"
+          color="lavender"
         />
         <StatCard
           title="Offers Made"
           value={stats?.statusCounts?.Offered || 0}
           icon={FiAward}
           subtitle={`${stats?.offerRate || 0}% offer rate`}
-          color="emerald"
+          color="sage"
         />
         <StatCard
           title="AI Resume Score"
           value={`${stats?.avgMatchScore || user?.resumeScore || 85}%`}
           icon={FiCpu}
           subtitle="ATS benchmark"
-          color="sky"
+          color="terracotta"
         />
       </div>
 
       {/* 2-Column Section: Deadlines & Interviews */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upcoming Deadlines Widget */}
-        <div className="glass-card rounded-2xl p-6 border shadow-xs space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="p-2 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
+        <ThreeCard maxTilt={5} className="p-6 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#F6EBDD] dark:border-[#553B30]">
+            <div className="flex items-center gap-2.5">
+              <span className="p-2 rounded-xl bg-[#F5B895]/20 text-[#C85C45] dark:text-[#F5B895]">
                 <FiClock className="w-4 h-4" />
               </span>
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+              <h3 className="font-extrabold text-sm text-[#3D2B24] dark:text-[#FFF8ED]">
                 Upcoming Deadlines
               </h3>
             </div>
             <Link
               to="/applications"
-              className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#C85C45] dark:text-[#F5B895] hover:underline flex items-center gap-1"
             >
               <span>View all</span>
               <FiArrowRight className="w-3.5 h-3.5" />
@@ -184,28 +192,28 @@ export const DashboardPage = () => {
 
           <div className="space-y-2.5">
             {upcomingDeadlines.length === 0 ? (
-              <div className="text-center py-8 text-xs text-slate-400">
-                No approaching deadlines found. You are ahead of schedule!
+              <div className="text-center py-8 text-xs text-[#3D2B24]/50 dark:text-[#FFF8ED]/50 font-medium">
+                No approaching deadlines found. You are completely ahead of schedule!
               </div>
             ) : (
               upcomingDeadlines.map((app) => (
                 <div
                   key={app._id}
-                  className="p-3 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/40 flex items-center justify-between gap-3 hover:border-amber-200 dark:hover:border-amber-900/60 transition"
+                  className="p-3 rounded-xl border border-[#F6EBDD] dark:border-[#553B30] bg-[#FFF8ED]/40 dark:bg-[#3D2B24]/40 flex items-center justify-between gap-3 hover:border-[#F5B895] transition"
                 >
                   <div className="min-w-0">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85C45] dark:text-[#F5B895]">
                       {app.company}
                     </span>
-                    <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
+                    <h5 className="text-xs font-bold text-[#3D2B24] dark:text-[#FFF8ED] truncate">
                       {app.role}
                     </h5>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 block">
+                    <span className="text-xs font-bold text-[#E9785B] dark:text-[#F5B895] block">
                       {formatRelativeTime(app.deadline)}
                     </span>
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] text-[#3D2B24]/60 dark:text-[#FFF8ED]/60 font-medium">
                       {formatDate(app.deadline)}
                     </span>
                   </div>
@@ -213,22 +221,22 @@ export const DashboardPage = () => {
               ))
             )}
           </div>
-        </div>
+        </ThreeCard>
 
         {/* Scheduled Interviews Widget */}
-        <div className="glass-card rounded-2xl p-6 border shadow-xs space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+        <ThreeCard maxTilt={5} className="p-6 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#F6EBDD] dark:border-[#553B30]">
+            <div className="flex items-center gap-2.5">
+              <span className="p-2 rounded-xl bg-[#B9A7E8]/20 text-[#6C54A7] dark:text-[#B9A7E8]">
                 <FiCalendar className="w-4 h-4" />
               </span>
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+              <h3 className="font-extrabold text-sm text-[#3D2B24] dark:text-[#FFF8ED]">
                 Upcoming Interviews
               </h3>
             </div>
             <Link
               to="/interviews"
-              className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#8F78C8] dark:text-[#B9A7E8] hover:underline flex items-center gap-1"
             >
               <span>Manage rounds</span>
               <FiArrowRight className="w-3.5 h-3.5" />
@@ -237,29 +245,29 @@ export const DashboardPage = () => {
 
           <div className="space-y-2.5">
             {upcomingInterviews.length === 0 ? (
-              <div className="text-center py-8 text-xs text-slate-400">
+              <div className="text-center py-8 text-xs text-[#3D2B24]/50 dark:text-[#FFF8ED]/50 font-medium">
                 No interviews scheduled yet. Keep applying!
               </div>
             ) : (
               upcomingInterviews.map((item) => (
                 <div
                   key={item._id}
-                  className="p-3 rounded-xl border border-indigo-100/70 dark:border-indigo-950 bg-indigo-50/20 dark:bg-indigo-950/20 flex items-center justify-between gap-3"
+                  className="p-3 rounded-xl border border-[#B9A7E8]/30 dark:border-[#553B30] bg-[#B9A7E8]/10 dark:bg-[#3D2B24]/40 flex items-center justify-between gap-3"
                 >
                   <div className="min-w-0">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6C54A7] dark:text-[#B9A7E8]">
                       {item.company}
                     </span>
-                    <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
+                    <h5 className="text-xs font-bold text-[#3D2B24] dark:text-[#FFF8ED] truncate">
                       {item.roundTitle}
                     </h5>
-                    <p className="text-[11px] text-slate-500">
+                    <p className="text-[11px] text-[#3D2B24]/60 dark:text-[#FFF8ED]/60 font-medium">
                       {formatDate(item.scheduledDate)} at {new Date(item.scheduledDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
                   <button
                     onClick={() => setSelectedInterviewForAi(item)}
-                    className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs shrink-0 active:scale-95 transition"
+                    className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#E9785B] to-[#C85C45] text-white font-bold text-xs shadow-sm shrink-0 active:scale-95 transition"
                   >
                     AI Prep
                   </button>
@@ -267,56 +275,56 @@ export const DashboardPage = () => {
               ))
             )}
           </div>
-        </div>
+        </ThreeCard>
       </div>
 
       {/* Recent Applications Feed */}
-      <div className="glass-card rounded-2xl p-6 border shadow-xs space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+      <ThreeCard maxTilt={3} className="p-6 sm:p-7 space-y-4">
+        <div className="flex items-center justify-between pb-4 border-b border-[#F6EBDD] dark:border-[#553B30]">
           <div>
-            <h3 className="font-bold text-base text-slate-900 dark:text-white">
+            <h3 className="font-extrabold text-lg text-[#3D2B24] dark:text-[#FFF8ED]">
               Recent Applications
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Quickly check status updates and application details
+            <p className="text-xs text-[#3D2B24]/60 dark:text-[#FFF8ED]/60 font-medium">
+              Quickly monitor pipeline movements and AI compatibility scores
             </p>
           </div>
           <Link
             to="/applications"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FFF8ED] dark:bg-[#3D2B24] text-[#C85C45] dark:text-[#F5B895] font-bold text-xs hover:bg-[#F6EBDD] border border-[#F5B895]/40 transition"
           >
             <span>Open Kanban Board</span>
             <FiArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="divide-y divide-slate-100 dark:divide-slate-800/80">
+        <div className="divide-y divide-[#F6EBDD] dark:divide-[#553B30]">
           {recentApplications.length === 0 ? (
-            <div className="text-center py-10 text-xs text-slate-400">
+            <div className="text-center py-10 text-xs text-[#3D2B24]/50 dark:text-[#FFF8ED]/50 font-medium">
               No applications tracked yet. Click "Track Application" above to add your first one!
             </div>
           ) : (
             recentApplications.map((app) => (
               <div
                 key={app._id}
-                className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/50 dark:hover:bg-slate-900/30 px-2 rounded-xl transition"
+                className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#FFF8ED]/60 dark:hover:bg-[#3D2B24]/30 px-3 rounded-xl transition"
               >
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85C45] dark:text-[#F5B895]">
                     {app.company}
                   </span>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#3D2B24] dark:text-[#FFF8ED]">
                     {app.role}
                   </h4>
-                  <div className="flex items-center gap-3 text-xs text-slate-500 mt-0.5">
+                  <div className="flex items-center gap-3 text-xs text-[#3D2B24]/60 dark:text-[#FFF8ED]/60 font-medium mt-0.5">
                     <span>{app.location}</span>
-                    {app.stipend && <span className="text-emerald-600 font-semibold">{app.stipend}</span>}
+                    {app.stipend && <span className="text-[#5C7D5A] font-bold">{app.stipend}</span>}
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
                   {app.aiMatchScore && (
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E9785B]/15 text-[#C85C45] dark:text-[#F5B895] border border-[#E9785B]/30">
                       {app.aiMatchScore}% AI Match
                     </span>
                   )}
@@ -328,7 +336,7 @@ export const DashboardPage = () => {
             ))
           )}
         </div>
-      </div>
+      </ThreeCard>
 
       {/* Add Application Modal */}
       <ApplicationModal

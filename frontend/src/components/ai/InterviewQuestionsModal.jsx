@@ -13,7 +13,7 @@ export const InterviewQuestionsModal = ({ isOpen, onClose, role = 'Frontend Engi
     try {
       setLoading(true);
       const res = await aiApi.generateInterviewQuestions({ role, company, skills });
-      if (res.data.success) {
+      if (res.data?.success) {
         setQuestions(res.data.questions || []);
       }
     } catch (err) {
@@ -30,9 +30,9 @@ export const InterviewQuestionsModal = ({ isOpen, onClose, role = 'Frontend Engi
   }, [isOpen, role, company]);
 
   const getDifficultyBadge = (diff) => {
-    if (diff === 'Hard') return 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300';
-    if (diff === 'Medium') return 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
-    return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300';
+    if (diff === 'Hard') return 'bg-terracotta/20 text-terracotta border border-terracotta/30';
+    if (diff === 'Medium') return 'bg-peach/30 text-coral border border-peach/50';
+    return 'bg-sage/20 text-sage border border-sage/30';
   };
 
   return (
@@ -43,15 +43,15 @@ export const InterviewQuestionsModal = ({ isOpen, onClose, role = 'Frontend Engi
       maxWidth="max-w-2xl"
     >
       <div className="space-y-4">
-        <div className="flex items-center justify-between p-3.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 text-xs">
-          <div className="flex items-center gap-2 text-indigo-900 dark:text-indigo-200">
-            <FiCpu className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+        <div className="flex items-center justify-between p-4 rounded-2xl bg-cream/90 border border-peach/40 text-xs">
+          <div className="flex items-center gap-2 text-brown font-semibold">
+            <FiCpu className="w-4 h-4 text-coral" />
             <span>Targeting <strong>{role}</strong> at <strong>{company}</strong></span>
           </div>
           <button
             onClick={fetchQuestions}
             disabled={loading}
-            className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline disabled:opacity-50"
+            className="text-xs font-bold text-coral hover:text-terracotta underline disabled:opacity-50 transition"
           >
             {loading ? 'Generating...' : 'Regenerate'}
           </button>
@@ -59,8 +59,8 @@ export const InterviewQuestionsModal = ({ isOpen, onClose, role = 'Frontend Engi
 
         {loading ? (
           <div className="py-16 text-center">
-            <div className="w-10 h-10 rounded-full border-4 border-indigo-200 border-t-indigo-600 animate-spin mx-auto mb-3"></div>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
+            <div className="w-10 h-10 rounded-full border-4 border-peach border-t-coral animate-spin mx-auto mb-3"></div>
+            <p className="text-xs font-bold text-brown">
               Synthesizing company-specific technical & behavioral questions...
             </p>
           </div>
@@ -71,51 +71,51 @@ export const InterviewQuestionsModal = ({ isOpen, onClose, role = 'Frontend Engi
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs transition"
+                  className="rounded-2xl border border-peach/30 bg-white/90 overflow-hidden shadow-xs transition-all hover:border-peach/60"
                 >
                   <button
                     onClick={() => setExpandedIndex(isExpanded ? null : idx)}
-                    className="w-full text-left p-4 flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition"
+                    className="w-full text-left p-4 flex items-start justify-between gap-3 hover:bg-peach/10 transition"
                   >
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-brown/50">
                           Q{idx + 1} • {q.category}
                         </span>
-                        <span className={`text-[10px] font-bold px-2 py-0.2 rounded-full ${getDifficultyBadge(q.difficulty)}`}>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${getDifficultyBadge(q.difficulty)}`}>
                           {q.difficulty}
                         </span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-snug">
+                      <h4 className="text-xs sm:text-sm font-bold text-brown leading-snug">
                         {q.question}
                       </h4>
                     </div>
                     {isExpanded ? (
-                      <FiChevronUp className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                      <FiChevronUp className="w-4 h-4 text-brown/50 shrink-0 mt-1" />
                     ) : (
-                      <FiChevronDown className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                      <FiChevronDown className="w-4 h-4 text-brown/50 shrink-0 mt-1" />
                     )}
                   </button>
 
                   {isExpanded && (
-                    <div className="px-4 pb-4 pt-1 space-y-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+                    <div className="px-4 pb-4 pt-1 space-y-3 border-t border-peach/20 text-xs bg-cream/30">
                       {q.hint && (
-                        <div className="p-3 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/40">
-                          <p className="font-bold text-amber-900 dark:text-amber-200 mb-0.5">
+                        <div className="p-3.5 rounded-xl bg-peach/20 border border-peach/40">
+                          <p className="font-bold text-brown mb-0.5">
                             💡 Interviewer Evaluation Focus / STAR Hint:
                           </p>
-                          <p className="text-amber-800 dark:text-amber-300 leading-relaxed">
+                          <p className="text-brown/80 leading-relaxed font-normal">
                             {q.hint}
                           </p>
                         </div>
                       )}
 
                       {q.practiceAnswer && (
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700">
-                          <p className="font-bold text-slate-800 dark:text-slate-200 mb-0.5">
+                        <div className="p-3.5 rounded-xl bg-white border border-peach/30">
+                          <p className="font-bold text-brown mb-0.5">
                             🎯 Model Answer Strategy:
                           </p>
-                          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                          <p className="text-brown/75 leading-relaxed font-normal">
                             {q.practiceAnswer}
                           </p>
                         </div>

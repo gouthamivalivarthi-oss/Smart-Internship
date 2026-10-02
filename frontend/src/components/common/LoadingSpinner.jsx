@@ -9,8 +9,8 @@ export const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => {
 
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-3">
-      <div className={`${sizeClasses[size] || sizeClasses.md} rounded-full border-indigo-200 border-t-indigo-600 animate-spin`}></div>
-      {text && <p className="text-sm font-medium text-slate-500 dark:text-slate-400 animate-pulse">{text}</p>}
+      <div className={`${sizeClasses[size] || sizeClasses.md} rounded-full border-peach border-t-coral animate-spin`}></div>
+      {text && <p className="text-xs font-semibold text-brown/70 animate-pulse">{text}</p>}
     </div>
   );
 };

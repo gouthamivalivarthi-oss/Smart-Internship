@@ -1,7 +1,8 @@
 import React from 'react';
+import ThreeCard from '../3d/ThreeCard';
+import Badge from '../common/Badge';
 import { FiBriefcase, FiMapPin, FiClock, FiDollarSign, FiExternalLink, FiPlus, FiCpu } from 'react-icons/fi';
 import { formatDate, formatRelativeTime } from '../../utils/helpers';
-import Badge from '../common/Badge';
 
 export const InternshipCard = ({
   internship,
@@ -24,27 +25,27 @@ export const InternshipCard = ({
   } = internship;
 
   const getTypeVariant = (t) => {
-    if (t === 'Remote') return 'success';
-    if (t === 'Hybrid') return 'purple';
-    return 'default';
+    if (t === 'Remote') return 'sage';
+    if (t === 'Hybrid') return 'lavender';
+    return 'peach';
   };
 
   return (
-    <div className="glass-card rounded-2xl p-5 border shadow-sm flex flex-col justify-between relative group hover:border-indigo-200 dark:hover:border-indigo-900/60">
+    <ThreeCard maxTilt={6} className="p-5 flex flex-col justify-between group">
       {/* Top row */}
       <div>
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-slate-100 to-indigo-50 dark:from-slate-800 dark:to-indigo-950 flex items-center justify-center font-bold text-indigo-600 dark:text-indigo-400 border border-slate-200/80 dark:border-slate-700 shadow-sm shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#E9785B]/20 via-[#F5B895]/30 to-[#B9A7E8]/20 flex items-center justify-center font-bold text-[#C85C45] dark:text-[#F5B895] border border-[#F5B895]/40 shadow-xs shrink-0 group-hover:scale-105 transition-transform duration-200">
               <FiBriefcase className="w-6 h-6" />
             </div>
             <div className="min-w-0">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 truncate block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#C85C45] dark:text-[#F5B895] truncate block">
                 {company}
               </span>
               <h3
                 onClick={() => onViewDetails && onViewDetails(internship)}
-                className="font-bold text-slate-900 dark:text-white text-base hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer line-clamp-1 transition"
+                className="font-extrabold text-[#3D2B24] dark:text-[#FFF8ED] text-base hover:text-[#E9785B] cursor-pointer line-clamp-1 transition"
               >
                 {title}
               </h3>
@@ -57,18 +58,18 @@ export const InternshipCard = ({
         </div>
 
         {/* Metadata */}
-        <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400 mb-4">
+        <div className="grid grid-cols-2 gap-2 text-xs text-[#3D2B24]/70 dark:text-[#FFF8ED]/70 mb-4 font-medium">
           <div className="flex items-center gap-1.5 truncate">
-            <FiMapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <FiMapPin className="w-3.5 h-3.5 text-[#E9785B] shrink-0" />
             <span className="truncate">{location}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 truncate text-emerald-600 dark:text-emerald-400 font-semibold">
+          <div className="flex items-center gap-1.5 truncate text-[#5C7D5A] font-bold">
             <FiDollarSign className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">{stipendDisplay || 'Competitive'}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 truncate col-span-2 text-amber-600 dark:text-amber-400">
+          <div className="flex items-center gap-1.5 truncate col-span-2 text-[#C85C45] dark:text-[#F5B895]">
             <FiClock className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">
               Deadline: {formatDate(deadline)} ({formatRelativeTime(deadline)})
@@ -81,13 +82,13 @@ export const InternshipCard = ({
           {skillsRequired.slice(0, 4).map((skill, idx) => (
             <span
               key={idx}
-              className="text-[11px] font-medium px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+              className="text-[11px] font-bold px-2.5 py-0.5 rounded-lg bg-[#FFF8ED] dark:bg-[#3D2B24] text-[#3D2B24] dark:text-[#FFF8ED] border border-[#F5B895]/30 shadow-2xs"
             >
               {skill}
             </span>
           ))}
           {skillsRequired.length > 4 && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 text-slate-400">
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-lg bg-[#F6EBDD]/60 dark:bg-[#3D2B24]/60 text-[#3D2B24]/50 dark:text-[#FFF8ED]/50">
               +{skillsRequired.length - 4} more
             </span>
           )}
@@ -95,10 +96,10 @@ export const InternshipCard = ({
       </div>
 
       {/* Action Footer */}
-      <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+      <div className="pt-3 border-t border-[#F6EBDD] dark:border-[#553B30] flex items-center justify-between gap-2">
         <button
           onClick={() => onCheckAiMatch && onCheckAiMatch(internship)}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 px-2.5 py-1.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C85C45] dark:text-[#F5B895] hover:text-[#E9785B] px-3 py-1.5 rounded-xl hover:bg-[#E9785B]/10 transition"
         >
           <FiCpu className="w-3.5 h-3.5" />
           <span>AI Match</span>
@@ -110,7 +111,7 @@ export const InternshipCard = ({
               href={applyUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="p-2 text-[#3D2B24]/50 dark:text-[#FFF8ED]/50 hover:text-[#E9785B] dark:hover:text-[#F5B895] rounded-xl hover:bg-[#FFF8ED] dark:hover:bg-[#452E25] transition"
               title="Official Application Link"
             >
               <FiExternalLink className="w-4 h-4" />
@@ -118,14 +119,14 @@ export const InternshipCard = ({
           )}
           <button
             onClick={() => onApplyOrTrack && onApplyOrTrack(internship)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs active:scale-95 transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#E9785B] to-[#C85C45] text-white text-xs font-bold shadow-[0_4px_12px_rgba(200,92,69,0.3)] hover:shadow-[0_6px_16px_rgba(200,92,69,0.45)] active:scale-95 transition"
           >
             <FiPlus className="w-3.5 h-3.5" />
             <span>Track</span>
           </button>
         </div>
       </div>
-    </div>
+    </ThreeCard>
   );
 };
 

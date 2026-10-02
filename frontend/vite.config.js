@@ -11,6 +11,7 @@ export default defineConfig({
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-charts': ['recharts'],
+          'vendor-three': ['three'],
           'vendor-icons': ['lucide-react', 'react-icons'],
           'vendor-utils': ['axios', 'react-hot-toast']
         }

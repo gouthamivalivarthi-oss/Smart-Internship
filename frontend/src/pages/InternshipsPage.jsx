@@ -66,16 +66,16 @@ export const InternshipsPage = () => {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2">
-          <span className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+        <div className="flex items-center gap-2.5">
+          <span className="p-2.5 rounded-2xl bg-[#E9785B]/15 text-[#C85C45] dark:text-[#F5B895] border border-[#E9785B]/30">
             <FiBriefcase className="w-5 h-5" />
           </span>
-          <h1 className="text-2xl font-black text-slate-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#3D2B24] dark:text-[#FFF8ED] tracking-tight">
             Internship Directory
           </h1>
         </div>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-          Explore curated tech internships from high-growth startups to Fortune 500 enterprises
+        <p className="text-xs sm:text-sm text-[#3D2B24]/70 dark:text-[#FFF8ED]/70 font-medium mt-1">
+          Explore curated tech internships from high-growth startups to Fortune 500 enterprises with 3D cards
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export const InternshipsPage = () => {
           }}
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {internships.map((internship) => (
             <InternshipCard
               key={internship._id}

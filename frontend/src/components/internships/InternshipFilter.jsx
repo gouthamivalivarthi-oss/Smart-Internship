@@ -1,4 +1,5 @@
 import React from 'react';
+import ThreeCard from '../3d/ThreeCard';
 import { FiSearch, FiFilter, FiSliders } from 'react-icons/fi';
 
 export const InternshipFilter = ({
@@ -10,20 +11,19 @@ export const InternshipFilter = ({
   setType,
   sort,
   setSort,
-  categories = []
 }) => {
   return (
-    <div className="glass-card rounded-2xl p-4 border shadow-sm space-y-3 mb-6">
+    <ThreeCard maxTilt={3} className="p-4 mb-6">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
         {/* Search input */}
         <div className="relative md:col-span-5">
-          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#C85C45] w-4 h-4" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search internships by company, role, or skill..."
-            className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-4 py-2.5 text-slate-800 dark:text-slate-200 focus:outline-indigo-500 shadow-xs"
+            className="w-full text-xs rounded-xl border border-[#F6EBDD] dark:border-[#553B30] bg-[#FFF8ED]/40 dark:bg-[#281B16] pl-10 pr-4 py-2.5 text-[#3D2B24] dark:text-[#FFF8ED] focus:outline-none focus:ring-2 focus:ring-[#E9785B]/50 focus:border-[#E9785B] shadow-inner font-medium transition"
           />
         </div>
 
@@ -32,7 +32,7 @@ export const InternshipFilter = ({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-slate-800 dark:text-slate-200 focus:outline-indigo-500 shadow-xs"
+            className="w-full text-xs rounded-xl border border-[#F6EBDD] dark:border-[#553B30] bg-[#FFF8ED]/40 dark:bg-[#281B16] px-3 py-2.5 text-[#3D2B24] dark:text-[#FFF8ED] font-semibold focus:outline-none focus:ring-2 focus:ring-[#E9785B]/50 transition"
           >
             <option value="All">All Categories</option>
             <option value="Software Engineering">Software Engineering</option>
@@ -48,7 +48,7 @@ export const InternshipFilter = ({
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-slate-800 dark:text-slate-200 focus:outline-indigo-500 shadow-xs"
+            className="w-full text-xs rounded-xl border border-[#F6EBDD] dark:border-[#553B30] bg-[#FFF8ED]/40 dark:bg-[#281B16] px-3 py-2.5 text-[#3D2B24] dark:text-[#FFF8ED] font-semibold focus:outline-none focus:ring-2 focus:ring-[#E9785B]/50 transition"
           >
             <option value="All">All Locations</option>
             <option value="Remote">Remote</option>
@@ -62,7 +62,7 @@ export const InternshipFilter = ({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="w-full text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-slate-800 dark:text-slate-200 focus:outline-indigo-500 shadow-xs"
+            className="w-full text-xs rounded-xl border border-[#F6EBDD] dark:border-[#553B30] bg-[#FFF8ED]/40 dark:bg-[#281B16] px-3 py-2.5 text-[#3D2B24] dark:text-[#FFF8ED] font-semibold focus:outline-none focus:ring-2 focus:ring-[#E9785B]/50 transition"
           >
             <option value="newest">Recently Posted</option>
             <option value="deadline">Upcoming Deadline</option>
@@ -70,7 +70,7 @@ export const InternshipFilter = ({
           </select>
         </div>
       </div>
-    </div>
+    </ThreeCard>
   );
 };
 

@@ -2,19 +2,23 @@ import React from 'react';
 
 export const Badge = ({ children, variant = 'default', size = 'sm', className = '' }) => {
   const variantStyles = {
-    default: 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300',
-    primary: 'bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-950/50 dark:text-indigo-300 dark:border-indigo-800',
-    success: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800',
-    warning: 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800',
-    danger: 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800',
-    purple: 'bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800',
-    cyan: 'bg-cyan-50 text-cyan-700 border border-cyan-200 dark:bg-cyan-950/50 dark:text-cyan-300 dark:border-cyan-800'
+    default: 'bg-[#F6EBDD] text-[#3D2B24] dark:bg-[#3D2B24] dark:text-[#FFF8ED] border border-[#F5B895]/30',
+    primary: 'bg-[#E9785B]/15 text-[#C85C45] dark:text-[#F5B895] border border-[#E9785B]/30',
+    coral: 'bg-[#E9785B]/15 text-[#C85C45] dark:text-[#F5B895] border border-[#E9785B]/35 font-bold',
+    peach: 'bg-[#F5B895]/20 text-[#C85C45] dark:text-[#F5B895] border border-[#F5B895]/40 font-bold',
+    success: 'bg-[#9DB79B]/20 text-[#5C7D5A] dark:text-[#9DB79B] border border-[#9DB79B]/40 font-semibold',
+    sage: 'bg-[#9DB79B]/20 text-[#5C7D5A] dark:text-[#9DB79B] border border-[#9DB79B]/40 font-semibold',
+    warning: 'bg-[#F5B895]/25 text-[#A84532] dark:text-[#F5B895] border border-[#F5B895]/50 font-semibold',
+    danger: 'bg-[#C85C45]/15 text-[#A84532] dark:text-[#E9785B] border border-[#C85C45]/30 font-semibold',
+    lavender: 'bg-[#B9A7E8]/25 text-[#6C54A7] dark:text-[#B9A7E8] border border-[#B9A7E8]/40 font-semibold',
+    purple: 'bg-[#8F78C8]/20 text-[#6C54A7] dark:text-[#B9A7E8] border border-[#8F78C8]/35 font-semibold',
+    terracotta: 'bg-[#C85C45]/20 text-[#A84532] dark:text-[#F5B895] border border-[#C85C45]/40 font-bold',
   };
 
   const sizeStyles = {
-    xs: 'px-2 py-0.5 text-xs',
+    xs: 'px-2 py-0.5 text-[11px]',
     sm: 'px-2.5 py-1 text-xs font-semibold',
-    md: 'px-3 py-1.5 text-sm font-semibold'
+    md: 'px-3.5 py-1.5 text-sm font-semibold'
   };
 
   return (

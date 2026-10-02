@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from '../common/Modal';
 import Badge from '../common/Badge';
+import ThreeButton from '../3d/ThreeButton';
 import { FiBriefcase, FiMapPin, FiClock, FiDollarSign, FiCalendar, FiExternalLink, FiPlus, FiCpu, FiCheck } from 'react-icons/fi';
 import { formatDate } from '../../utils/helpers';
 
@@ -17,41 +18,41 @@ export const InternshipDetailModal = ({
     <Modal isOpen={isOpen} onClose={onClose} title={internship.title} maxWidth="max-w-2xl">
       <div className="space-y-5">
         {/* Header summary */}
-        <div className="flex items-start justify-between gap-4 p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/60">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-2xl bg-cream/90 border border-peach/40 shadow-xs">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-coral">
               {internship.company}
             </span>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+            <h2 className="text-xl font-bold text-brown mt-0.5">
               {internship.title}
             </h2>
-            <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-slate-600 dark:text-slate-300">
+            <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-brown/70 font-medium">
               <span className="flex items-center gap-1">
-                <FiMapPin className="w-3.5 h-3.5 text-slate-400" />
+                <FiMapPin className="w-3.5 h-3.5 text-coral" />
                 {internship.location} ({internship.type})
               </span>
-              <span className="flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="flex items-center gap-1 font-bold text-sage">
                 <FiDollarSign className="w-3.5 h-3.5" />
                 {internship.stipendDisplay || 'Competitive'}
               </span>
               <span className="flex items-center gap-1">
-                <FiCalendar className="w-3.5 h-3.5 text-slate-400" />
+                <FiCalendar className="w-3.5 h-3.5 text-brown/50" />
                 {internship.duration || 'Summer 2026'}
               </span>
             </div>
           </div>
 
-          <Badge variant="primary" size="md">
+          <Badge variant="coral" size="md">
             {internship.category}
           </Badge>
         </div>
 
         {/* Description */}
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-brown/60 mb-2">
             About the Role
           </h4>
-          <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-line">
+          <p className="text-xs leading-relaxed text-brown/85 whitespace-pre-line font-normal">
             {internship.description}
           </p>
         </div>
@@ -59,13 +60,13 @@ export const InternshipDetailModal = ({
         {/* Requirements */}
         {internship.requirements && internship.requirements.length > 0 && (
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-brown/60 mb-2">
               Key Requirements
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+            <ul className="space-y-1.5 text-xs text-brown/80 font-medium">
               {internship.requirements.map((req, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <FiCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <FiCheck className="w-4 h-4 text-sage shrink-0 mt-0.5" />
                   <span>{req}</span>
                 </li>
               ))}
@@ -75,14 +76,14 @@ export const InternshipDetailModal = ({
 
         {/* Skills required */}
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-brown/60 mb-2">
             Skills & Technologies
           </h4>
           <div className="flex flex-wrap gap-1.5">
             {internship.skillsRequired?.map((skill, i) => (
               <span
                 key={i}
-                className="text-xs font-medium px-3 py-1 rounded-lg bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-slate-700"
+                className="text-xs font-semibold px-3 py-1 rounded-xl bg-peach/20 text-brown border border-peach/40"
               >
                 {skill}
               </span>
@@ -91,20 +92,20 @@ export const InternshipDetailModal = ({
         </div>
 
         {/* Deadline notice */}
-        <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 flex items-center gap-2 text-xs text-amber-800 dark:text-amber-300">
-          <FiClock className="w-4 h-4 text-amber-500 shrink-0" />
+        <div className="p-3.5 rounded-2xl bg-peach/15 border border-peach/30 flex items-center gap-2 text-xs text-brown font-medium">
+          <FiClock className="w-4 h-4 text-coral shrink-0" />
           <span>
-            Application Deadline: <strong>{formatDate(internship.deadline)}</strong>
+            Application Deadline: <strong className="text-coral">{formatDate(internship.deadline)}</strong>
           </span>
         </div>
 
         {/* Action buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-peach/20">
           <button
             onClick={() => onCheckAiMatch(internship)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-800 transition"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-lavender/25 hover:bg-lavender/35 text-purple text-xs font-bold border border-lavender/40 transition"
           >
-            <FiCpu className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+            <FiCpu className="w-4 h-4 text-purple" />
             <span>Evaluate AI Resume Match</span>
           </button>
 
@@ -114,19 +115,20 @@ export const InternshipDetailModal = ({
                 href={internship.applyUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-brown/70 hover:text-brown hover:bg-peach/20 rounded-xl transition"
               >
                 <FiExternalLink className="w-3.5 h-3.5" />
                 <span>External Link</span>
               </a>
             )}
-            <button
+            <ThreeButton
               onClick={() => onTrack(internship)}
-              className="inline-flex items-center gap-1.5 px-5 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md shadow-indigo-500/20 active:scale-95 transition"
+              variant="primary"
+              size="sm"
             >
               <FiPlus className="w-4 h-4" />
               <span>Track Application</span>
-            </button>
+            </ThreeButton>
           </div>
         </div>
       </div>

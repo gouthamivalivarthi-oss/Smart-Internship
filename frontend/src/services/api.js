@@ -21,7 +21,15 @@ api.interceptors.request.use(
 
 // Response interceptor to handle errors gracefully
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Detect if Vercel SPA rewrite served index.html instead of actual backend JSON API response
+    if (typeof response.data === 'string' && response.data.trim().toLowerCase().startsWith('<!doctype html')) {
+      const err = new Error('Backend API not reachable. Please set VITE_API_BASE_URL in your Vercel Environment Variables.');
+      err.response = { data: { message: 'Backend API not reachable. Please configure VITE_API_BASE_URL.' }, status: 503 };
+      return Promise.reject(err);
+    }
+    return response;
+  },
   (error) => {
     if (error.response && error.response.status === 401) {
       // Don't auto-redirect if trying to login/register

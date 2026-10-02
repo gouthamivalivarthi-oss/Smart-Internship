@@ -1,0 +1,21 @@
+{
+  "name": "smart-internship-tracker-root",
+  "version": "1.0.0",
+  "description": "Smart Internship Tracker with AI-Powered Application Management",
+  "main": "backend/server.js",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend && npm run build",
+    "seed": "cd backend && npm run seed",
+    "start": "cd backend && npm start"
+  },
+  "keywords": ["internship", "tracker", "ai", "mern", "react", "vite", "nodejs"],
+  "author": "Smart Internship Tracker",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

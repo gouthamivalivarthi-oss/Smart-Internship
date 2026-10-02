@@ -5,6 +5,7 @@ services:
     plan: free
     buildCommand: npm run install:all && npm run build:frontend
     startCommand: npm run start
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
@@ -15,4 +16,6 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: AI_API_KEY
+        sync: false
+      - key: CLIENT_URL
         sync: false

@@ -33,37 +33,37 @@ export const formatRelativeTime = (dateString) => {
 export const getStatusBadgeStyle = (status) => {
   switch (status) {
     case 'Wishlist':
-      return 'bg-[#F6EBDD] text-[#3D2B24] border-[#F5B895]/40 dark:bg-[#3D2B24] dark:text-[#FFF8ED] dark:border-[#553B30] font-semibold';
+      return 'bg-[#E9E0D2] text-[#292722] border-[#B8B0A3]/50 dark:bg-[#35312B] dark:text-[#FFFDF7] font-bold';
     case 'Applied':
-      return 'bg-[#F5B895]/20 text-[#C85C45] border-[#F5B895]/50 dark:bg-[#F5B895]/15 dark:text-[#F5B895] font-bold';
+      return 'bg-[#E28A45]/20 text-[#B87333] border-[#E28A45]/40 dark:bg-[#E28A45]/15 dark:text-[#D6A85F] font-bold';
     case 'In Review':
-      return 'bg-[#F5B895]/30 text-[#A84532] border-[#F5B895]/60 dark:bg-[#F5B895]/20 dark:text-[#F5B895] font-bold';
+      return 'bg-[#D6A85F]/25 text-[#B87333] border-[#D6A85F]/50 dark:bg-[#D6A85F]/20 dark:text-[#D6A85F] font-bold';
     case 'Interviewing':
-      return 'bg-[#B9A7E8]/25 text-[#6C54A7] border-[#B9A7E8]/40 dark:bg-[#B9A7E8]/20 dark:text-[#B9A7E8] font-bold';
+      return 'bg-[#B87333]/20 text-[#B87333] border-[#B87333]/40 dark:bg-[#B87333]/25 dark:text-[#D6A85F] font-bold';
     case 'Offered':
-      return 'bg-[#9DB79B]/25 text-[#5C7D5A] border-[#9DB79B]/50 dark:bg-[#9DB79B]/20 dark:text-[#9DB79B] font-bold';
+      return 'bg-[#7E9278]/25 text-[#5F725A] border-[#7E9278]/50 dark:bg-[#7E9278]/20 dark:text-[#7E9278] font-bold';
     case 'Rejected':
-      return 'bg-[#C85C45]/15 text-[#A84532] border-[#C85C45]/30 dark:bg-[#C85C45]/20 dark:text-[#F5B895] font-semibold';
+      return 'bg-[#C96B4B]/15 text-[#C96B4B] border-[#C96B4B]/35 dark:bg-[#C96B4B]/20 dark:text-[#E28A45] font-bold';
     default:
-      return 'bg-[#F6EBDD] text-[#3D2B24] border-[#F5B895]/30';
+      return 'bg-[#E9E0D2] text-[#292722] border-[#B8B0A3]/40';
   }
 };
 
 export const getPriorityBadgeStyle = (priority) => {
   switch (priority) {
     case 'High':
-      return 'bg-[#C85C45]/20 text-[#A84532] dark:text-[#F5B895] border border-[#C85C45]/40 font-bold';
+      return 'bg-[#C96B4B]/20 text-[#C96B4B] dark:text-[#E28A45] border border-[#C96B4B]/40 font-bold';
     case 'Medium':
-      return 'bg-[#F5B895]/30 text-[#C85C45] dark:text-[#F5B895] border border-[#F5B895]/50 font-bold';
+      return 'bg-[#E28A45]/20 text-[#B87333] dark:text-[#D6A85F] border border-[#E28A45]/50 font-bold';
     case 'Low':
-      return 'bg-[#F6EBDD] text-[#3D2B24] dark:bg-[#3D2B24] dark:text-[#FFF8ED] border border-[#F5B895]/30';
+      return 'bg-[#E9E0D2] text-[#292722] dark:bg-[#35312B] dark:text-[#FFFDF7] border border-[#B8B0A3]/40 font-semibold';
     default:
-      return 'bg-[#F6EBDD] text-[#3D2B24]';
+      return 'bg-[#E9E0D2] text-[#292722]';
   }
 };
 
 export const getScoreColor = (score) => {
-  if (score >= 80) return 'text-[#5C7D5A] stroke-[#5C7D5A]';
-  if (score >= 60) return 'text-[#E9785B] stroke-[#E9785B]';
-  return 'text-[#C85C45] stroke-[#C85C45]';
+  if (score >= 80) return 'text-[#7E9278] stroke-[#7E9278]';
+  if (score >= 60) return 'text-[#D6A85F] stroke-[#D6A85F]';
+  return 'text-[#C96B4B] stroke-[#C96B4B]';
 };

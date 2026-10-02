@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 /**
  * ThreeBackground - High-performance, lightweight Three.js ambient background
- * Features warm floating particles, subtle geometric spheres, warm lighting, and mouse parallax.
+ * Features warm floating copper & gold particles, subtle geometric spheres, warm lighting, and mouse parallax.
  * Strictly disposes of WebGL resources on unmount.
  */
 const ThreeBackground = ({ className = '', density = 'medium' }) => {
@@ -33,28 +33,28 @@ const ThreeBackground = ({ className = '', density = 'medium' }) => {
     container.appendChild(renderer.domElement);
 
     // Warm Ambient and Directional Lighting
-    const ambientLight = new THREE.AmbientLight(0xfff8ed, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xfffdf7, 1.3);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xf5b895, 1.5);
+    const dirLight1 = new THREE.DirectionalLight(0xb87333, 1.5);
     dirLight1.position.set(20, 20, 20);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0xb9a7e8, 1.2);
+    const dirLight2 = new THREE.DirectionalLight(0xd6a85f, 1.2);
     dirLight2.position.set(-20, -10, 15);
     scene.add(dirLight2);
 
-    // Particle Field (Warm Coral, Peach, Lavender Glow)
-    const particleCount = density === 'high' ? 90 : 50;
+    // Particle Field (Warm Copper, Gold, Terracotta, Sage Green)
+    const particleCount = density === 'high' ? 80 : 45;
     const particleGeometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
     const warmPalette = [
-      new THREE.Color(0xe9785b), // Coral
-      new THREE.Color(0xf5b895), // Peach
-      new THREE.Color(0xb9a7e8), // Lavender
-      new THREE.Color(0x9db79b), // Sage Green
+      new THREE.Color(0xb87333), // Copper
+      new THREE.Color(0xd6a85f), // Soft Gold
+      new THREE.Color(0xc96b4b), // Terracotta
+      new THREE.Color(0x7e9278), // Sage Green
     ];
 
     for (let i = 0; i < particleCount; i++) {
@@ -75,40 +75,40 @@ const ThreeBackground = ({ className = '', density = 'medium' }) => {
       size: 0.65,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.65,
       blending: THREE.NormalBlending,
     });
 
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particles);
 
-    // Soft Floating Geometric Meshes (Warm Peach & Lavender spheres/icosahedrons)
+    // Soft Floating Geometric Meshes
     const floatingObjects = [];
-    const sphereGeo = new THREE.SphereGeometry(1.4, 24, 24);
-    const icosaGeo = new THREE.IcosahedronGeometry(1.6, 0);
-    const torusGeo = new THREE.TorusGeometry(2, 0.4, 16, 32);
+    const sphereGeo = new THREE.SphereGeometry(1.3, 24, 24);
+    const icosaGeo = new THREE.IcosahedronGeometry(1.5, 0);
+    const torusGeo = new THREE.TorusGeometry(1.8, 0.35, 16, 32);
 
     const warmMaterials = [
       new THREE.MeshStandardMaterial({
-        color: 0xf5b895,
+        color: 0xb87333,
         roughness: 0.35,
-        metalness: 0.1,
-        transparent: true,
-        opacity: 0.45,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xb9a7e8,
-        roughness: 0.4,
-        metalness: 0.15,
-        transparent: true,
-        opacity: 0.4,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0x9db79b,
-        roughness: 0.5,
-        metalness: 0.05,
+        metalness: 0.3,
         transparent: true,
         opacity: 0.35,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xd6a85f,
+        roughness: 0.4,
+        metalness: 0.25,
+        transparent: true,
+        opacity: 0.35,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0x7e9278,
+        roughness: 0.5,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.3,
       }),
     ];
 
@@ -172,8 +172,8 @@ const ThreeBackground = ({ className = '', density = 'medium' }) => {
       currentMouseX += (targetMouseX - currentMouseX) * 0.05;
       currentMouseY += (targetMouseY - currentMouseY) * 0.05;
 
-      camera.position.x = currentMouseX * 3;
-      camera.position.y = -currentMouseY * 3;
+      camera.position.x = currentMouseX * 2.5;
+      camera.position.y = -currentMouseY * 2.5;
       camera.lookAt(0, 0, 0);
 
       if (!prefersReducedMotion) {
@@ -185,7 +185,7 @@ const ThreeBackground = ({ className = '', density = 'medium' }) => {
         floatingObjects.forEach((obj, idx) => {
           obj.rotation.x += obj.userData.rotX;
           obj.rotation.y += obj.userData.rotY;
-          obj.position.y += Math.sin(elapsedTime + idx * 2) * 0.006;
+          obj.position.y += Math.sin(elapsedTime + idx * 2) * 0.005;
         });
       }
 

@@ -42,11 +42,15 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. mobile apps, curl, postman)
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.endsWith('.onrender.com')
+      ) {
         return callback(null, true);
       }
-      return callback(null, true); // Permissive in dev to avoid friction
+      return callback(null, true); // Permissive fallback to prevent deployment CORS blocking
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
